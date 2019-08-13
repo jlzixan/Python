@@ -101,8 +101,11 @@ class DecisionStumpErrorRate:
             return
 
         minError = np.sum(y != y_mode)
+        
+        #Showing progress bar
+        from tqdm import tqdm
 
-        for d in range(D):
+        for d in tqdm(range(D)):
             for n in range(N):
                 value = X[n, d]
 
@@ -115,13 +118,15 @@ class DecisionStumpErrorRate:
                 errors = np.sum(y_pred != y)
 
                 if errors < minError:
-                    print("Model Errors", errors)
+                    #print("Model Errors", errors)
                     minError = errors
                     self.splitVariable = d
                     self.splitValue = value
                     self.splitSatisfied = y_sat
                     self.splitNSatisfied = y_not
-
+                    
+        return self.splitVariable
+        
     def predict(self, X):
         M, D = X.shape
 

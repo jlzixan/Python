@@ -102,10 +102,9 @@ class DecisionStumpErrorRate:
 
         minError = np.sum(y != y_mode)
         
-        #Showing progress bar
-        from tqdm import tqdm
 
-        for d in tqdm(range(D)):
+
+        for d in range(D):
             for n in range(N):
                 value = X[n, d]
 
